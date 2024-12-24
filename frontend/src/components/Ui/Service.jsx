@@ -1,61 +1,76 @@
-import React from 'react'
-import pymentimg from'../assets/pyment.png'
-import register_img from'../assets/register.png'
-import storage_img from'../assets/storage.png'
-const Service = () => {
-  return (
-    <div className=' bg-gray-50   pb-[7rem] mt-[4rem] pt-[2rem] '>
-          <h1 className=' text-center text-[2.3rem] font-bold '>Our Ser
-          <span className='text-[#EA3C3C]'>vice</span></h1>
+import React from "react";
+import pymentimg from "../assets/pyment.png";
+import register_img from "../assets/register.png";
+import storage_img from "../assets/storage.png";
 
-          {/* Cards Container */}
-
-      <div className=" flex justify-center space-x-5 mt-[3rem] ">
-
-      {/* Start card one */}
-
-      <div className=" w-[350px] h-[320px] bg-white  shadow-lg
-      rounded-md border-b-2 border-red-500 pt-[1rem] space-y-4 ">
-      <img className=' w-[100px] h-[100px] mx-auto ' src={register_img} alt="" />
-        <h1 className=' text-center text-[1.5rem] font-semibold '>Vehicle Registration System</h1>
-        <p className=' text-center text-gray-500 px-4'>Simplify the process of registering your vehicle or renewing your registration online. Fast, secure, and hassle-free!</p>
-    
-      </div>
-       {/* End card two */}
-
-        {/* Start card two */}
-
-      <div className=" w-[350px] h-[320px] bg-white  shadow-lg
-      rounded-md border-b-2 border-red-500 pt-[1rem] space-y-2 ">
-      <img className=' w-[100px] h-[100px] mx-auto ' src={storage_img} alt="" />
-        <h1 className=' text-center text-[1.5rem] font-semibold '>Document Management Storage</h1>
-        <p className=' text-center text-gray-500'>Digitally store and access your vehicle’s important documents like registration
-             papers, insurance, and inspection reports.</p>
-    
-      </div>
-       {/* End card two */}
-
-        {/* Start card three */}
-
-      <div className=" w-[350px] h-[320px] bg-white  shadow-lg
-      rounded-md border-b-2 border-red-500 pt-[1rem] space-y-4 ">
-      <img className=' w-[100px] h-[100px] mx-auto ' src={pymentimg} alt="" />
-        <h1 className=' text-center text-[1.5rem] font-semibold '>Payment Gateway Integration</h1>
-        <p className=' text-center text-gray-500'>Make payments for your registration, taxes, and fines securely with integrated payment options 
-            including credit cards, PayPal, and online </p>
-    
-      </div>
-       {/* End card three */}
-
-     
-
-    
-
-      </div>
-      {/* Cards Container */}
-      
+const ServiceCard = ({ image, title, description }) => (
+  <div className="bg-white shadow-lg hover:shadow-xl p-6 border-red-500 border-b-2 rounded-lg w-full transition-shadow duration-300">
+    <div className="flex flex-col items-center space-y-4">
+      <img className="w-20 h-20 object-contain" src={image} alt={title} />
+      <h2 className="font-semibold text-center text-xl md:text-2xl">{title}</h2>
+      <p className="text-center text-gray-500 text-sm md:text-base">
+        {description}
+      </p>
     </div>
-  )
-}
+  </div>
+);
 
-export default Service
+const Service = () => {
+  const services = [
+    {
+      image: register_img,
+      title: "Vehicle Registration System",
+      description:
+        "Simplify the process of registering your vehicle or renewing your registration online. Fast, secure, and hassle-free!",
+    },
+    {
+      image: storage_img,
+      title: "Document Management Storage",
+      description:
+        "Digitally store and access your vehicle's important documents like registration papers, insurance, and inspection reports.",
+    },
+    {
+      image: pymentimg,
+      title: "Payment Gateway Integration",
+      description:
+        "Make payments for your registration, taxes, and fines securely with integrated payment options including credit cards, PayPal, and online banking.",
+    },
+  ];
+
+  return (
+    <section className="bg-gray-50 py-12 md:py-16 lg:py-20">
+      <div className="mx-auto px-4 sm:px-6 lg:px-8 container">
+        <div className="mb-12 text-center">
+          <h1 className="font-bold text-3xl md:text-4xl">
+            Our <span className="text-[#EA3C3C]">Service</span>
+          </h1>
+          <p className="mx-auto mt-4 max-w-2xl text-gray-600">
+            We provide comprehensive vehicle registration services to make your
+            experience seamless and efficient.
+          </p>
+        </div>
+
+        {/* Services Grid */}
+        <div className="gap-6 lg:gap-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          {services.map((service, index) => (
+            <ServiceCard
+              key={index}
+              image={service.image}
+              title={service.title}
+              description={service.description}
+            />
+          ))}
+        </div>
+
+        {/* Call to Action */}
+        <div className="mt-12 text-center">
+          <button className="bg-[#EA3C3C] hover:bg-[#d63535] px-8 py-3 rounded-md font-semibold text-white transform transition-colors duration-200 hover:scale-105">
+            Explore All Services
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Service;

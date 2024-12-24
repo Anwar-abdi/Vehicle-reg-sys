@@ -1,11 +1,30 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const isActiveLink = (path) => {
+    return location.pathname === path;
+  };
+
+  const getLinkStyles = (path) => {
+    return `relative font-semibold transition-colors duration-300 ease-in-out group ${
+      isActiveLink(path)
+        ? "text-[#EA3C3C]"
+        : "text-gray-600 hover:text-[#EA3C3C]"
+    }`;
+  };
+
+  const getUnderlineStyles = (path) => {
+    return `bottom-0 left-0 absolute bg-[#EA3C3C] h-0.5 transition-all duration-300 ease-in-out ${
+      isActiveLink(path) ? "w-0" : "w-0 group-hover:w-full"
+    }`;
   };
 
   return (
@@ -39,35 +58,21 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <div className="md:flex items-center space-x-10 hidden">
-            <Link
-              to="/"
-              className="relative font-semibold text-gray-600 transition-colors duration-300 ease-in-out group"
-            >
-              <span className="relative z-10 hover:text-[#EA3C3C]">Home</span>
-              <span className="group-hover:w-full bottom-0 left-0 absolute bg-[#EA3C3C] w-0 h-0.5 transition-all duration-300 ease-in-out"></span>
+            <Link to="/" className={getLinkStyles("/")}>
+              <span className="relative z-10">Home</span>
+              <span className={getUnderlineStyles("/")}></span>
             </Link>
-            <Link
-              to="/service"
-              className="relative font-semibold text-gray-600 transition-colors duration-300 ease-in-out group"
-            >
-              <span className="relative z-10 hover:text-[#EA3C3C]">
-                Service
-              </span>
-              <span className="group-hover:w-full bottom-0 left-0 absolute bg-[#EA3C3C] w-0 h-0.5 transition-all duration-300 ease-in-out"></span>
+            <Link to="/service" className={getLinkStyles("/service")}>
+              <span className="relative z-10">Service</span>
+              <span className={getUnderlineStyles("/service")}></span>
             </Link>
-            <Link
-              to="/system"
-              className="relative font-semibold text-gray-600 transition-colors duration-300 ease-in-out group"
-            >
-              <span className="relative z-10 hover:text-[#EA3C3C]">System</span>
-              <span className="group-hover:w-full bottom-0 left-0 absolute bg-[#EA3C3C] w-0 h-0.5 transition-all duration-300 ease-in-out"></span>
+            <Link to="/system" className={getLinkStyles("/system")}>
+              <span className="relative z-10">System</span>
+              <span className={getUnderlineStyles("/system")}></span>
             </Link>
-            <Link
-              to="/about"
-              className="relative font-semibold text-gray-600 transition-colors duration-300 ease-in-out group"
-            >
-              <span className="relative z-10 hover:text-[#EA3C3C]">About</span>
-              <span className="group-hover:w-full bottom-0 left-0 absolute bg-[#EA3C3C] w-0 h-0.5 transition-all duration-300 ease-in-out"></span>
+            <Link to="/about" className={getLinkStyles("/about")}>
+              <span className="relative z-10">About</span>
+              <span className={getUnderlineStyles("/about")}></span>
             </Link>
           </div>
 
@@ -141,28 +146,44 @@ const Header = () => {
         <div className="space-y-1 px-2 pt-2 pb-3">
           <Link
             to="/"
-            className="block hover:bg-red-50 px-4 py-3 rounded-lg font-medium text-base text-gray-700 hover:text-[#EA3C3C] transform transition-all hover:translate-x-2 duration-300 ease-in-out"
+            className={`block px-4 py-3 rounded-lg font-medium text-base transform transition-all hover:translate-x-2 duration-300 ease-in-out ${
+              isActiveLink("/")
+                ? "text-[#EA3C3C] bg-red-50"
+                : "text-gray-700 hover:text-[#EA3C3C] hover:bg-red-50"
+            }`}
             onClick={() => setIsMenuOpen(false)}
           >
             Home
           </Link>
           <Link
             to="/service"
-            className="block hover:bg-red-50 px-4 py-3 rounded-lg font-medium text-base text-gray-700 hover:text-[#EA3C3C] transform transition-all hover:translate-x-2 duration-300 ease-in-out"
+            className={`block px-4 py-3 rounded-lg font-medium text-base transform transition-all hover:translate-x-2 duration-300 ease-in-out ${
+              isActiveLink("/service")
+                ? "text-[#EA3C3C] bg-red-50"
+                : "text-gray-700 hover:text-[#EA3C3C] hover:bg-red-50"
+            }`}
             onClick={() => setIsMenuOpen(false)}
           >
             Service
           </Link>
           <Link
             to="/system"
-            className="block hover:bg-red-50 px-4 py-3 rounded-lg font-medium text-base text-gray-700 hover:text-[#EA3C3C] transform transition-all hover:translate-x-2 duration-300 ease-in-out"
+            className={`block px-4 py-3 rounded-lg font-medium text-base transform transition-all hover:translate-x-2 duration-300 ease-in-out ${
+              isActiveLink("/system")
+                ? "text-[#EA3C3C] bg-red-50"
+                : "text-gray-700 hover:text-[#EA3C3C] hover:bg-red-50"
+            }`}
             onClick={() => setIsMenuOpen(false)}
           >
             System
           </Link>
           <Link
             to="/about"
-            className="block hover:bg-red-50 px-4 py-3 rounded-lg font-medium text-base text-gray-700 hover:text-[#EA3C3C] transform transition-all hover:translate-x-2 duration-300 ease-in-out"
+            className={`block px-4 py-3 rounded-lg font-medium text-base transform transition-all hover:translate-x-2 duration-300 ease-in-out ${
+              isActiveLink("/about")
+                ? "text-[#EA3C3C] bg-red-50"
+                : "text-gray-700 hover:text-[#EA3C3C] hover:bg-red-50"
+            }`}
             onClick={() => setIsMenuOpen(false)}
           >
             About

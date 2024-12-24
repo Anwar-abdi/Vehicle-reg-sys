@@ -4,7 +4,6 @@ const userRoutes = require('./routes/userRoutes');
 const vehicleRoutes = require('./routes/vehicleRoutes');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const multer = require('multer');
 
 dotenv.config();
 
@@ -48,21 +47,6 @@ app.use('/api/vehicles', vehicleRoutes);
 // Test route
 app.get('/test', (req, res) => {
   res.json({ message: 'Server is running' });
-});
-
-// Error handling middleware
-app.use((err, req, res, next) => {
-  if (err instanceof multer.MulterError) {
-    return res.status(400).json({
-      message: 'File upload error',
-      error: err.message,
-    });
-  }
-  console.error('Error:', err);
-  res.status(500).json({
-    status: 'error',
-    message: err.message || 'Internal server error',
-  });
 });
 
 const PORT = process.env.PORT || 4000;

@@ -53,49 +53,35 @@ exports.registerUser = async (req, res) => {
 exports.loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log('Login attempt for email:', email); // Debug log
 
     // Find the user by email
     const user = await User.findOne({ email });
-    console.log('User found:', user ? 'Yes' : 'No'); // Debug log
 
     if (!user) {
-      console.log('User not found for email:', email); // Debug log
-      return res.status(401).json({
-        message: 'Invalid credentials: user not found',
-        debug: 'No user with this email exists',
-      });
+      return res
+        .status(401)
+        .json({ message: 'Invalid credentials: user not found' });
     }
 
     // Compare the password
-    const isPasswordValid = await user.comparePassword(password);
-    console.log('Password valid:', isPasswordValid); // Debug log
-
-    if (!isPasswordValid) {
-      console.log('Invalid password for user:', email); // Debug log
-      return res.status(401).json({
-        message: 'Invalid credentials: wrong password',
-        debug: 'Password does not match',
+    if (user && (await bcrypt.compare(password, user.password))) {
+      res.status(200).json({
+        _id: user.userid,
+        username: user.username,
+        email: user.email,
+        phone: user.phone,
+        token: createToken(user.id),
       });
     }
 
-    // Create token
+    // Create a token
     const token = createToken(user._id);
 
-    // Send response
-    res.status(200).json({
-      _id: user._id,
-      username: user.username,
-      email: user.email,
-      phone: user.phone,
-      token: token,
-    });
+    // Respond with the token
+    res.status(200).json({ token });
   } catch (error) {
-    console.error('Login error:', error);
-    res.status(500).json({
-      error: error.message,
-      stack: process.env.NODE_ENV === 'development' ? error.stack : undefined,
-    });
+    console.error('Error during login:', error); // Log error for debugging
+    res.status(500).json({ error: error.message });
   }
 };
 

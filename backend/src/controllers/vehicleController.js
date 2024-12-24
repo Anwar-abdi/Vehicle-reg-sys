@@ -1,34 +1,9 @@
 const Vehicle = require('../models/Vehicle');
-const { uploadFileToFirebase } = require('../config/multerConfig');
 
 const registerVehicle = async (req, res) => {
   try {
-    console.log('Files received:', req.files); // Debug log
-    console.log('Body received:', req.body); // Debug log
-
-    // Check if files exist
-    if (!req.files) {
-      return res.status(400).json({ error: 'No files uploaded' });
-    }
-
-    // Upload files to Firebase and get URLs
-    const uploadPromises = [];
-    const fileUrls = {};
-
-    for (const [fieldName, files] of Object.entries(req.files)) {
-      if (files && files[0]) {
-        const file = files[0];
-        const path = `vehicles/${Date.now()}-${file.originalname}`;
-        uploadPromises.push(
-          uploadFileToFirebase(file.buffer, path, file.mimetype).then((url) => {
-            fileUrls[fieldName] = url;
-          })
-        );
-      }
-    }
-
-    // Wait for all file uploads to complete
-    await Promise.all(uploadPromises);
+    // Log request body for debugging
+    console.log('Body received:', req.body);
 
     // Create new vehicle document
     const vehicle = new Vehicle({
@@ -37,11 +12,6 @@ const registerVehicle = async (req, res) => {
       model: req.body.model,
       year: req.body.year,
       licensePlate: req.body.licensePlate,
-      documents: {
-        proofOfOwnership: fileUrls.proofOfOwnership,
-        insurance: fileUrls.insurance,
-        emissionTest: fileUrls.emissionTest,
-      },
     });
 
     await vehicle.save();

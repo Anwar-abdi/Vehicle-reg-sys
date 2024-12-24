@@ -53,17 +53,35 @@ const Heropage = () => {
           </div>
 
           {/* Trust indicators */}
-          <div className="flex justify-center lg:justify-start items-center space-x-8 border-gray-100 mt-12 pt-8 border-t">
-            <div className="flex items-center">
-              <span className="font-bold text-[#EA3C3C] text-3xl">24/7</span>
-              <span className="ml-2 text-gray-600 text-sm">
-                Expert Assistance
+          <div className="flex flex-wrap items-center gap-8 border-gray-100 mt-12 px-4 pt-8 border-t">
+            <div className="flex flex-col items-center hover:bg-gray-50 p-3 rounded-lg transition-all duration-300 group">
+              <span className="group-hover:text-3xl font-bold text-[#EA3C3C] text-2xl transition-all duration-300">
+                24/7
+              </span>
+              <span className="mt-2 font-medium text-center text-gray-600 text-xs">
+                Expert
+                <br />
+                Assistance
               </span>
             </div>
-            <div className="flex items-center">
-              <span className="font-bold text-[#EA3C3C] text-3xl">100%</span>
-              <span className="ml-2 text-gray-600 text-sm">
-                Guaranteed Safety
+            <div className="flex flex-col items-center hover:bg-gray-50 p-3 rounded-lg transition-all duration-300 group">
+              <span className="group-hover:text-3xl font-bold text-[#EA3C3C] text-2xl transition-all duration-300">
+                100%
+              </span>
+              <span className="mt-2 font-medium text-center text-gray-600 text-xs">
+                Guaranteed
+                <br />
+                Safety
+              </span>
+            </div>
+            <div className="flex flex-col items-center hover:bg-gray-50 p-3 rounded-lg transition-all duration-300 group">
+              <span className="group-hover:text-3xl font-bold text-[#EA3C3C] text-2xl transition-all duration-300">
+                10K+
+              </span>
+              <span className="mt-2 font-medium text-center text-gray-600 text-xs">
+                Happy
+                <br />
+                Customers
               </span>
             </div>
           </div>
@@ -83,31 +101,38 @@ const Heropage = () => {
         </div>
       </div>
 
-      {/* Feature Cards - Enhanced */}
-      <div className="gap-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-12 px-4">
-        <div className="bg-white shadow-md hover:shadow-lg p-6 rounded-lg transition-shadow duration-200">
-          <div className="mb-2 font-semibold text-[#EA3C3C] text-xl">
-            Swift & Seamless
+      {/* Feature Cards - Enhanced & Centered */}
+      <div className="mx-auto max-w-5xl">
+        <div className="gap-8 grid grid-cols-1 md:grid-cols-3 mt-16 px-4">
+          <div className="bg-white hover:bg-[#EA3C3C] shadow-md hover:shadow-xl p-8 rounded-xl transition-all duration-300 group">
+            <div className="group-hover:text-white mb-4 font-semibold text-[#EA3C3C] text-2xl">
+              Swift & Seamless
+            </div>
+            <p className="group-hover:text-white/90 text-gray-600">
+              Experience lightning-fast registration process with our
+              state-of-the-art digital platform
+            </p>
           </div>
-          <p className="text-gray-600">
-            Experience lightning-fast registration at your fingertips
-          </p>
-        </div>
-        <div className="bg-white shadow-md hover:shadow-lg p-6 rounded-lg transition-shadow duration-200">
-          <div className="mb-2 font-semibold text-[#EA3C3C] text-xl">
-            Fort Knox Security
+
+          <div className="bg-white hover:bg-[#EA3C3C] shadow-md hover:shadow-xl p-8 rounded-xl transition-all duration-300 group">
+            <div className="group-hover:text-white mb-4 font-semibold text-[#EA3C3C] text-2xl">
+              Fort Knox Security
+            </div>
+            <p className="group-hover:text-white/90 text-gray-600">
+              Your data is protected with bank-grade encryption and advanced
+              security protocols
+            </p>
           </div>
-          <p className="text-gray-600">
-            Bank-grade encryption protecting your valuable information
-          </p>
-        </div>
-        <div className="md:col-span-2 lg:col-span-1 bg-white shadow-md hover:shadow-lg p-6 rounded-lg transition-shadow duration-200">
-          <div className="mb-2 font-semibold text-[#EA3C3C] text-xl">
-            Round-the-Clock Care
+
+          <div className="bg-white hover:bg-[#EA3C3C] shadow-md hover:shadow-xl p-8 rounded-xl transition-all duration-300 group">
+            <div className="group-hover:text-white mb-4 font-semibold text-[#EA3C3C] text-2xl">
+              24/7 Expert Support
+            </div>
+            <p className="group-hover:text-white/90 text-gray-600">
+              Our dedicated team of experts is always ready to assist you around
+              the clock
+            </p>
           </div>
-          <p className="text-gray-600">
-            Dedicated support team ready to assist you anytime
-          </p>
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import login_img from "../assets/key.png";
-import signup_img from "../assets/signup.png";
+import signup_img from "../assets/sign_up.png";
 import edit_img from "../assets/edit.png";
 import { Link } from "react-router-dom";
 

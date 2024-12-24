@@ -14,6 +14,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import AdminLayout from './components/layouts/AdminLayout';
 import Dashboard from './pages/Admin/Dashboard';
 import ProtectedRoute from './components/ProtectedRoute';
+import Newsletter from "./components/Ui/Newsletter";
 
 const App = () => {
   return (
@@ -41,6 +42,7 @@ const App = () => {
           />
         </Routes>
         {/* <VehicleForm /> */}
+        <Newsletter />
         <Footer />
       </Router>
       <ToastContainer

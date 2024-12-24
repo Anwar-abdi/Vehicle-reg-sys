@@ -34,7 +34,7 @@ const UserPage = () => {
     toast.success(
       <div className="flex items-center">
         <FaUser className="mr-2" />
-        <span>Welcome back, {parsedUser.username}!</span>
+        <span>Welcome back, {parsedUser.User}!</span>
       </div>,
       {
         position: 'top-right',

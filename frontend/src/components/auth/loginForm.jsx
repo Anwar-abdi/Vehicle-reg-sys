@@ -31,7 +31,7 @@ const LoginForm = () => {
         localStorage.setItem("userData", JSON.stringify(response));
 
         toast.success("Login successful! 👋", {
-          position: "top-right",
+          position: "top-center",
           autoClose: 2000,
         });
 
@@ -44,7 +44,7 @@ const LoginForm = () => {
       toast.error(
         error.response?.data?.message || `Login failed: ${error.message}`,
         {
-          position: "top-right",
+          position: "top-center",
           autoClose: 4000,
         }
       );

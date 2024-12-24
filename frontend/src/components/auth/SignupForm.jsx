@@ -2,7 +2,7 @@ import { useState } from "react";
 import { registerUser } from "../../services/api";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import luxuryCar from "../assets/signup_car.png";
+import luxuryCar from "../assets/sign_up.png";
 
 const SignupForm = () => {
   const [formData, setFormData] = useState({

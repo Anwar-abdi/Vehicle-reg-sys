@@ -7,18 +7,17 @@ import Service from './components/Ui/Service';
 import System from './components/Ui/System';
 import About from './components/Ui/About';
 import Footer from './components/Ui/Footer';
-// import VehicleForm from './components/vehicles/vehicleForm';
+import VehicleForm from './components/vehicles/VehicleForm'; // Uncomment and import VehicleForm
 import UserPage from './pages/UserPage';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AdminLayout from './components/layouts/AdminLayout';
 import Dashboard from './pages/Admin/Dashboard';
 import ProtectedRoute from './components/ProtectedRoute';
-import Newsletter from "./components/Ui/Newsletter";
+import Newsletter from './components/Ui/Newsletter';
 
 const App = () => {
   return (
-    // <AuthProvider>
     <>
       <Router>
         <Header />
@@ -30,6 +29,8 @@ const App = () => {
           <Route path="/system" element={<System />} />
           <Route path="/about" element={<About />} />
           <Route path="/user" element={<UserPage />} />
+          <Route path="/vehicleForm" element={<VehicleForm />} />{' '}
+          {/* Add route for VehicleForm */}
           <Route
             path="/admin"
             element={
@@ -41,7 +42,6 @@ const App = () => {
             }
           />
         </Routes>
-        {/* <VehicleForm /> */}
         <Newsletter />
         <Footer />
       </Router>
@@ -58,7 +58,6 @@ const App = () => {
         theme="light"
       />
     </>
-    // </AuthProvider>
   );
 };
 

@@ -14,13 +14,6 @@ export default function VehicleForm() {
     owner: '',
   });
 
-  const [documents, setDocuments] = useState({
-    proofOfOwnership: '',
-    insurance: '',
-    emissionTest: '',
-    document: '',
-  });
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setVehicle((prev) => ({
@@ -29,80 +22,51 @@ export default function VehicleForm() {
     }));
   };
 
-  const handleFileChange = (e) => {
-    const { name, files } = e.target;
-    if (files[0]) {
-      setDocuments((prev) => ({
-        ...prev,
-        [name]: files[0],
-      }));
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      // Validate file types and sizes
-      const validateFile = (file, maxSize = 5 * 1024 * 1024) => {
-        // 5MB max
-        const allowedTypes = ['application/pdf', 'image/jpeg', 'image/png'];
-        if (!allowedTypes.includes(file.type)) {
-          throw new Error('Only PDF, JPEG, and PNG files are allowed');
-        }
-        if (file.size > maxSize) {
-          throw new Error('File size should not exceed 5MB');
-        }
-      };
-
-      // Validate required files
-      if (!documents.proofOfOwnership || !documents.insurance) {
-        throw new Error(
-          'Proof of ownership and insurance documents are required'
-        );
+      // Validate required fields
+      if (
+        !vehicle.make ||
+        !vehicle.model ||
+        !vehicle.year ||
+        !vehicle.vin ||
+        !vehicle.licensePlate ||
+        !vehicle.type ||
+        !vehicle.owner
+      ) {
+        throw new Error('All fields are required');
       }
 
-      validateFile(documents.proofOfOwnership);
-      validateFile(documents.insurance);
-      if (documents.emissionTest) {
-        validateFile(documents.emissionTest);
+      // Prepare the vehicle data as a plain JSON object
+      const vehicleData = { ...vehicle };
+
+      // Send the POST request to the server with JSON data
+      const response = await uploadApi.post('/vehicles/register', vehicleData, {
+        headers: {
+          'Content-Type': 'application/json', // Ensure the request body is treated as JSON
+        },
+      });
+
+      // Check if the response status is successful
+      if (response.status === 200) {
+        toast.success('Vehicle registered successfully!');
+
+        // Reset the form after successful submission
+        setVehicle({
+          make: '',
+          model: '',
+          year: '',
+          vin: '',
+          licensePlate: '',
+          type: '',
+          owner: '',
+        });
+      } else {
+        throw new Error('Failed to register vehicle');
       }
-
-      const formData = new FormData();
-
-      // Add vehicle data
-      Object.keys(vehicle).forEach((key) => {
-        formData.append(key, vehicle[key]);
-      });
-
-      // Add document files
-      Object.keys(documents).forEach((key) => {
-        if (documents[key]) {
-          formData.append(key, documents[key]);
-        }
-      });
-
-      await uploadApi.post('/vehicles/register', formData);
-
-      toast.success('Vehicle registered successfully!');
-
-      // Reset form
-      setVehicle({
-        make: '',
-        model: '',
-        year: '',
-        vin: '',
-        licensePlate: '',
-        type: '',
-        owner: '',
-      });
-      setDocuments({
-        proofOfOwnership: '',
-        insurance: '',
-        emissionTest: '',
-        document: '',
-      });
     } catch (error) {
       toast.error(error.message || 'Failed to register vehicle');
     } finally {
@@ -254,62 +218,6 @@ export default function VehicleForm() {
                 className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
             </div>
-
-            <div className="mb-4 flex flex-col w-[48%]">
-              <label
-                className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="document"
-              >
-                Upload Document:
-              </label>
-              <input
-                type="file"
-                id="document"
-                name="document"
-                onChange={handleFileChange}
-                required
-                className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              />
-            </div>
-          </div>
-
-          <div className="flex flex-wrap justify-between gap-4">
-            <div className="mb-4 flex flex-col w-[48%]">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
-                Proof of Ownership:
-              </label>
-              <input
-                type="file"
-                name="proofOfOwnership"
-                onChange={handleFileChange}
-                required
-                className="appearance-none border rounded w-full py-2 px-3"
-              />
-            </div>
-            <div className="mb-4 flex flex-col w-[48%]">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
-                Insurance Document:
-              </label>
-              <input
-                type="file"
-                name="insurance"
-                onChange={handleFileChange}
-                required
-                className="appearance-none border rounded w-full py-2 px-3"
-              />
-            </div>
-          </div>
-
-          <div className="mb-4 flex flex-col">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              Emission Test (Optional):
-            </label>
-            <input
-              type="file"
-              name="emissionTest"
-              onChange={handleFileChange}
-              className="appearance-none border rounded w-full py-2 px-3"
-            />
           </div>
 
           <div className="flex justify-center">

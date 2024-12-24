@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { FaUser, FaEdit, FaCheck, FaTimes } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const UserPage = () => {
   const navigate = useNavigate();
@@ -82,108 +83,127 @@ const UserPage = () => {
     );
   }
 
-  return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="bg-white shadow-lg rounded-lg p-6 max-w-2xl mx-auto">
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-bold text-gray-800">
-            <FaUser className="inline-block mr-2 mb-1" />
-            User Dashboard
-          </h1>
-          <button
-            onClick={handleLogout}
-            className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
-          >
-            Logout
-          </button>
-        </div>
-
-        {user && (
-          <div className="space-y-4">
-            <div className="bg-gray-50 p-4 rounded-lg">
-              <div className="flex justify-between items-center mb-4">
-                <h2 className="text-xl font-semibold">Profile Information</h2>
-                {!editing ? (
-                  <button
-                    onClick={handleEdit}
-                    className="text-blue-500 hover:text-blue-600"
-                  >
-                    <FaEdit className="text-xl" />
-                  </button>
-                ) : (
-                  <div className="space-x-2">
-                    <button
-                      onClick={handleSave}
-                      className="text-green-500 hover:text-green-600"
-                    >
-                      <FaCheck className="text-xl" />
-                    </button>
-                    <button
-                      onClick={handleCancel}
-                      className="text-red-500 hover:text-red-600"
-                    >
-                      <FaTimes className="text-xl" />
-                    </button>
-                  </div>
-                )}
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <p className="text-gray-600">Username</p>
-                  {editing ? (
-                    <input
-                      type="text"
-                      value={editedData.username}
-                      onChange={(e) =>
-                        setEditedData({
-                          ...editedData,
-                          username: e.target.value,
-                        })
-                      }
-                      className="mt-1 p-2 border rounded w-full"
-                    />
-                  ) : (
-                    <p className="font-medium">{user.username}</p>
-                  )}
-                </div>
-                <div>
-                  <p className="text-gray-600">Email</p>
-                  <p className="font-medium">{user.email}</p>
-                </div>
-                <div>
-                  <p className="text-gray-600">Phone</p>
-                  {editing ? (
-                    <input
-                      type="text"
-                      value={editedData.phone}
-                      onChange={(e) =>
-                        setEditedData({ ...editedData, phone: e.target.value })
-                      }
-                      className="mt-1 p-2 border rounded w-full"
-                    />
-                  ) : (
-                    <p className="font-medium">{user.phone}</p>
-                  )}
-                </div>
-              </div>
+return (
+  <div className="min-h-screen bg-gray-100 py-12">
+    <div className="container mx-auto px-4">
+      {/* Profile Header Card */}
+      <div className="bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl p-6 mb-6 shadow-lg">
+        <div className="flex justify-between items-center">
+          <div className="flex items-center space-x-4">
+            <div className="bg-white p-3 rounded-full">
+              <FaUser className="text-blue-500 text-2xl" />
             </div>
-
-            <div className="bg-gray-50 p-4 rounded-lg">
-              <h2 className="text-xl font-semibold mb-4">Account Actions</h2>
-              <div className="space-x-4">
-                <button
-                  onClick={() => navigate('/vehicle-form')}
-                  className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
-                >
-                  Register Vehicle
-                </button>
-              </div>
+            <div className="text-white">
+              <h1 className="text-2xl font-bold">Welcome, {user?.username}!</h1>
+              <p className="text-blue-100">{user?.email}</p>
             </div>
           </div>
-        )}
+          <button
+            onClick={handleLogout}
+            className="bg-white text-blue-500 hover:bg-blue-50 px-4 py-2 rounded-lg font-medium transition duration-200 flex items-center space-x-2"
+          >
+            <span>Logout</span>
+          </button>
+        </div>
+      </div>
+
+      <div className="grid md:grid-cols-2 gap-6">
+        {/* Profile Information Card */}
+        <div className="bg-white rounded-xl shadow-lg p-6">
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-xl font-semibold text-gray-800 flex items-center">
+              <FaUser className="mr-2 text-blue-500" />
+              Profile Information
+            </h2>
+            {!editing ? (
+              <button
+                onClick={handleEdit}
+                className="text-blue-500 hover:text-blue-600 transition duration-200"
+              >
+                <FaEdit className="text-xl" />
+              </button>
+            ) : (
+              <div className="space-x-2">
+                <button
+                  onClick={handleSave}
+                  className="text-green-500 hover:text-green-600 transition duration-200"
+                >
+                  <FaCheck className="text-xl" />
+                </button>
+                <button
+                  onClick={handleCancel}
+                  className="text-red-500 hover:text-red-600 transition duration-200"
+                >
+                  <FaTimes className="text-xl" />
+                </button>
+              </div>
+            )}
+          </div>
+
+          <div className="space-y-4">
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <p className="text-sm text-gray-600 mb-1">Username</p>
+              {editing ? (
+                <input
+                  type="text"
+                  value={editedData.username}
+                  onChange={(e) =>
+                    setEditedData({
+                      ...editedData,
+                      username: e.target.value,
+                    })
+                  }
+                  className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              ) : (
+                <p className="font-medium text-gray-800">{user.username}</p>
+              )}
+            </div>
+
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <p className="text-sm text-gray-600 mb-1">Email</p>
+              <p className="font-medium text-gray-800">{user.email}</p>
+            </div>
+
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <p className="text-sm text-gray-600 mb-1">Phone</p>
+              {editing ? (
+                <input
+                  type="text"
+                  value={editedData.phone}
+                  onChange={(e) =>
+                    setEditedData({ ...editedData, phone: e.target.value })
+                  }
+                  className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              ) : (
+                <p className="font-medium text-gray-800">{user.phone}</p>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Quick Actions Card */}
+        <div className="bg-white rounded-xl shadow-lg p-6">
+          <h2 className="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+            <span className="mr-2">🚗</span>
+            Vehicle Management
+          </h2>
+          <div className="space-y-4">
+            <Link
+              to="/vehicleForm"
+              className="w-full bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-medium transition duration-200 flex items-center justify-center space-x-2"
+            >
+              <span>Register New Vehicle</span>
+            </Link>
+            {/* Add more action buttons here if needed */}
+          </div>
+        </div>
       </div>
     </div>
-  );
+  </div>
+);
 };
+
 
 export default UserPage;

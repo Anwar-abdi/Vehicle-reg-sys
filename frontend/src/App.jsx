@@ -7,7 +7,7 @@ import Service from './components/Ui/Service';
 import System from './components/Ui/System';
 import About from './components/Ui/About';
 import Footer from './components/Ui/Footer';
-import VehicleForm from './components/vehicles/vehicleForm';
+// import VehicleForm from './components/vehicles/vehicleForm';
 import UserPage from './pages/UserPage';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -40,7 +40,7 @@ const App = () => {
             }
           />
         </Routes>
-        <VehicleForm />
+        {/* <VehicleForm /> */}
         <Footer />
       </Router>
       <ToastContainer

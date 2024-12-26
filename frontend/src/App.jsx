@@ -7,7 +7,7 @@ import Service from "./components/Ui/Service";
 import System from "./components/Ui/System";
 import About from "./components/Ui/About";
 import Contact from "./pages/Contact";
-// import Documentation from "./pages/Documentation";
+import Documentation from "./pages/Documentation";
 import Footer from "./components/Ui/Footer";
 import UserPage from "./pages/UserPage";
 import { ToastContainer } from "react-toastify";
@@ -32,7 +32,7 @@ const App = () => {
           <Route path="/system" element={<System />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          {/* <Route path="/documentation" element={<Documentation />} /> */}
+          <Route path="/documentation" element={<Documentation />} />
           <Route path="/user" element={<UserPage />} />
           <Route
             path="/admin"

@@ -25,7 +25,7 @@ const ServiceCard = ({ icon, title, description, features }) => {
       <div className="group-hover:scale-x-100 top-0 absolute inset-x-0 bg-gradient-to-r from-[#EA3C3C] to-rose-400 rounded-t-2xl h-1 transform origin-left transition-transform duration-300 scale-x-0" />
 
       <div className="space-y-8">
-        <motion.div
+        <motion.div 
           className="flex items-center space-x-4"
           animate={{ scale: isHovered ? 1.05 : 1 }}
           transition={{ duration: 0.2 }}
@@ -170,12 +170,12 @@ const Service = () => {
   }, []);
 
   // Check if we're on the service page
-  const isServicePage = window.location.pathname === "/service";
+  const isServicePage = window.location.pathname === '/service';
 
   return (
     <section className="bg-gradient-to-b from-white to-gray-50 py-16 md:py-20 lg:py-24">
       {/* Background elements */}
-      <motion.div
+      <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
@@ -187,7 +187,7 @@ const Service = () => {
 
       <div className="relative mx-auto px-4 sm:px-6 lg:px-8 container">
         {/* Header */}
-        <motion.div
+        <motion.div 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           className="mb-16 text-center"
@@ -209,10 +209,7 @@ const Service = () => {
           {isLoading ? (
             // Loading skeleton
             [...Array(6)].map((_, index) => (
-              <div
-                key={index}
-                className="bg-gray-100 rounded-2xl h-96 animate-pulse"
-              ></div>
+              <div key={index} className="animate-pulse bg-gray-100 rounded-2xl h-96"></div>
             ))
           ) : filteredServices.length > 0 ? (
             filteredServices.map((service, index) => (
@@ -225,10 +222,8 @@ const Service = () => {
               />
             ))
           ) : (
-            <div className="col-span-full py-10 text-center">
-              <p className="text-gray-500">
-                No services found matching your search.
-              </p>
+            <div className="col-span-full text-center py-10">
+              <p className="text-gray-500">No services found matching your search.</p>
             </div>
           )}
         </div>

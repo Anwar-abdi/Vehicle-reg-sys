@@ -52,7 +52,7 @@ const Sidebar = ({ activeSection, setActiveSection }) => {
   ];
 
   return (
-    <div className="top-16 left-0 fixed border-gray-200 bg-white border-r w-64 h-screen overflow-y-auto">
+    <aside className="top-16 sticky border-gray-200 bg-white border-r w-64 h-[calc(100vh-4rem)] overflow-y-auto">
       <div className="p-4">
         <div className="relative">
           <input
@@ -89,7 +89,7 @@ const Sidebar = ({ activeSection, setActiveSection }) => {
           </div>
         ))}
       </nav>
-    </div>
+    </aside>
   );
 };
 
@@ -142,13 +142,17 @@ const Documentation = () => {
   const [activeSection, setActiveSection] = useState("introduction");
 
   return (
-    <div className="bg-white pt-16 min-h-screen">
-      <Sidebar
-        activeSection={activeSection}
-        setActiveSection={setActiveSection}
-      />
-      <div className="mx-auto ml-64 p-8 max-w-4xl">
-        <ContentSection id={activeSection} />
+    <div className="pt-16 pb-16 min-h-screen">
+      <div className="relative flex">
+        <Sidebar
+          activeSection={activeSection}
+          setActiveSection={setActiveSection}
+        />
+        <main className="flex-1 ml-64 p-8">
+          <div className="mx-auto max-w-4xl">
+            <ContentSection id={activeSection} />
+          </div>
+        </main>
       </div>
     </div>
   );
